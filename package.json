@@ -1,0 +1,26 @@
+{
+  "name": "rest-myanimelist",
+  "version": "1.0.0",
+  "description": "Rest API MAL",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mal-scraper": "^2.11.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brokiem/rest-anime.git"
+  },
+  "author": "brokiem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brokiem/rest-anime/issues"
+  },
+  "homepage": "https://github.com/brokiem/rest-anime#readme"
+}
