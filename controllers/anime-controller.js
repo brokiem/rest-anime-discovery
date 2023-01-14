@@ -12,13 +12,15 @@ export const getAnimeDetails = async (req, res) => {
     if (title.split('&&').length > 1) {
         const titles = title.split('&&');
 
-        let data = [];
+        let promises = [];
 
         for (let i = 0; i < titles.length; i++) {
-            data.push(await mal.getInfoFromName(titles[i]));
+            promises.push(mal.getInfoFromName(titles[i]));
         }
 
-        res.status(200).json({"success": true, "message": data});
+        Promise.all(promises).then((values) => {
+            res.status(200).json({"success": true, "message": values});
+        });
     } else {
         mal.getInfoFromName(req.params.title)
             .then((data) => {
