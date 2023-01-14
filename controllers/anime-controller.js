@@ -3,13 +3,31 @@
 import * as mal from 'mal-scraper';
 
 export const getAnimeDetails = async (req, res) => {
-    mal.getInfoFromName(req.params.title)
-        .then((data) => {
-            res.status(200).json({"success": true, "message": data});
-        })
-        .catch((err) => {
-            res.status(500).json({"success": false, "error": err.toString})
-        });
+    const { title } = req.params;
+
+    if (title.split('&&').length > 10) {
+        return res.status(400).json({success: false, error: 'You can only search for 10 anime at a time.'});
+    }
+
+    if (title.split('&&').length > 1) {
+        const titles = title.split('&&');
+
+        let data = [];
+
+        for (let i = 0; i < titles.length; i++) {
+            data.push(await mal.getInfoFromName(titles[i]));
+        }
+
+        res.status(200).json({"success": true, "message": data});
+    } else {
+        mal.getInfoFromName(req.params.title)
+            .then((data) => {
+                res.status(200).json({"success": true, "message": data});
+            })
+            .catch((err) => {
+                res.status(500).json({"success": false, "error": err.toString})
+            });
+    }
 }
 
 export const getAnimeRecommendations = async (req, res) => {
