@@ -5,7 +5,7 @@ import * as mal from 'mal-scraper';
 export const getAnimeDetails = async (req, res) => {
     const { title } = req.params;
 
-    if (title.split('&&').length > 10) {
+    if (title.split('&&').length > 30) {
         return res.status(400).json({success: false, error: 'You can only search for 10 anime at a time.'});
     }
 
